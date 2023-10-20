@@ -1,0 +1,16 @@
+const { app } = require("../src/server");
+
+// IMport supertest so we can manage the app/server in tests properly
+const request = require("supertest");
+
+describe("server root route exists and returns hello world", () => {
+	test("Root route exists and returns status 200", async () => {
+		const responseResult = await request(app).get("/");
+		expect(responseResult.statusCode).toBe(200);
+	});
+
+	test("Root route exits and returns hello world message,", async () => {
+		const reponse = await request(app).get("/");
+		expect(reponse.body.message).toEqual("Hello World");
+	});
+});
