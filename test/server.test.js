@@ -14,3 +14,14 @@ describe("server root route exists and returns hello world", () => {
 		expect(reponse.body.message).toEqual("Hello World");
 	});
 });
+
+describe("POST to root route copies message in request body", () => {
+	test('POST request.body.message of "HELLO WORLD" returns received value of "hello world"', async () => {
+		let messageToSend = "Hello world";
+		const response = await request(app)
+			.post("/")
+			.send({ message: messageToSend });
+
+		expect(response.body.received).toEqual(messageToSend);
+	});
+});
